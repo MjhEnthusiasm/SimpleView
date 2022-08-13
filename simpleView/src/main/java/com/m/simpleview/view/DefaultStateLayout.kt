@@ -1,4 +1,4 @@
-package com.zengjc.demo.myapplication.view
+package com.m.simpleview.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
-import com.zengjc.demo.myapplication.R
-import com.zengjc.demo.myapplication.test.io_demo.Log
+import com.m.simpleview.R
 
 class DefaultStateLayout:FrameLayout {
 

@@ -14,8 +14,8 @@ open class IconTextView :AppCompatTextView {
 
     private var isFirstSetDrawable = false
 
-    private var drawableOne: Drawable? = null
-    private var drawableTwo: Drawable? = null
+    var drawableOne: Drawable? = null
+    var drawableTwo: Drawable? = null
 
     private var drawableOneGravity = 0
     private var drawableOneLeft = 0
@@ -78,12 +78,14 @@ open class IconTextView :AppCompatTextView {
         }
     }
 
+    @JvmName("setDrawableOne1")
     fun setDrawableOne(drawable: Drawable){
         this.drawableOne = drawable
         drawableOne()
         invalidate()
     }
 
+    @JvmName("setDrawableTwo1")
     fun setDrawableTwo(drawable: Drawable){
         this.drawableTwo = drawable
         drawableTwo()

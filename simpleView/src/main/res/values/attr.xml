@@ -94,4 +94,29 @@
             <flag name="end" value="0x00800005" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="SmartRatingBar">
+        <attr format="integer" name="srbNumStars"/>
+        <attr format="dimension" name="srbGap"/>
+        <attr format="float" name="srbRating"/>
+        <attr format="float" name="srbStepSize"/>
+        <attr format="integer" name="srbOrientation">
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="0"/>
+        </attr>
+        <attr format="reference" name="srbFullDrawable"/>
+        <attr format="reference" name="srbEmptyDrawable"/>
+        <attr format="boolean" name="srbIsIndicator"/>
+    </declare-styleable>
+
+    <declare-styleable name="DefaultStateLayout">
+        <attr format="reference" name="layout_no_content"/>
+        <attr format="reference" name="layout_no_netword"/>
+        <attr format="reference" name="layout_error"/>
+        <attr format="reference" name="layout_loadding"/>
+    </declare-styleable>
+
+    <declare-styleable name="AnimationDrawableView">
+        <attr format="reference|color" name="animationDrawable"/>
+    </declare-styleable>
 </resources>

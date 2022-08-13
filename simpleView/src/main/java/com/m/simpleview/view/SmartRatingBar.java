@@ -1,4 +1,4 @@
-package com.wyt.evaluating.view;
+package com.m.simpleview.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,10 +11,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import androidx.core.content.ContextCompat;
 
-import com.wyt.evaluating.R;
+import com.m.simpleview.R;
 
 public class SmartRatingBar extends View {
     private int mMaxStarNum = 5;

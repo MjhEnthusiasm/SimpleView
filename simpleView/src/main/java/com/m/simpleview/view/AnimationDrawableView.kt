@@ -1,11 +1,11 @@
-package com.wyt.evaluating.view
+package com.m.simpleview.view
 
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
-import com.wyt.evaluating.R
+import com.m.simpleview.R
 
 class AnimationDrawableView:View {
 
