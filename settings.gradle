@@ -2,9 +2,6 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         maven { url 'https://jitpack.io' }
-        maven {
-            url ('C:\\Users\\请原谅\\.m2\\repository')
-        }
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
