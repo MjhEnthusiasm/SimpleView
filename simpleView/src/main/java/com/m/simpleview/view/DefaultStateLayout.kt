@@ -278,7 +278,7 @@ class DefaultStateLayout:FrameLayout {
         return context.resources.getIdentifier(name, "id", context.packageName)
     }
 
-    private fun goneAllChild(){
+    fun goneAllChild(){
         for(i in 0 until childCount){
             val view = getChildAt(i)
             if(view.visibility == View.VISIBLE){
