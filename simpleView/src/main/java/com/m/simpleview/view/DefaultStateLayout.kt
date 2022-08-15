@@ -241,6 +241,7 @@ class DefaultStateLayout:FrameLayout {
     private fun createLoadding(){
         if(loadingView == null && layoutLoadding != 0){
             loadingView = LayoutInflater.from(context).inflate(layoutLoadding,this,false)
+            loadingView?.visibility = View.GONE
             addView(loadingView)
         }
     }
@@ -248,6 +249,7 @@ class DefaultStateLayout:FrameLayout {
     private fun createNoNetWord(){
         if(noNetWordView == null && layoutNoNetWord != 0){
             noNetWordView = LayoutInflater.from(context).inflate(layoutNoNetWord,this,false)
+            noNetWordView?.visibility = View.GONE
             addView(noNetWordView)
         }
     }
@@ -255,6 +257,7 @@ class DefaultStateLayout:FrameLayout {
     private fun createNoContent(){
         if(noContentView == null && layoutNoContent != 0){
             noContentView = LayoutInflater.from(context).inflate(layoutNoContent,this,false)
+            noContentView?.visibility = View.GONE
             addView(noContentView)
         }
     }
@@ -262,6 +265,7 @@ class DefaultStateLayout:FrameLayout {
     private fun createError(){
         if(errorView == null && layoutError != 0){
             errorView = LayoutInflater.from(context).inflate(layoutError,this,false)
+            errorView?.visibility = View.GONE
             addView(errorView)
         }
     }
@@ -269,6 +273,7 @@ class DefaultStateLayout:FrameLayout {
     private fun createSuccess(){
         if(successView == null && layoutSuccess != 0){
             successView = LayoutInflater.from(context).inflate(layoutSuccess,this,false)
+            successView?.visibility = View.GONE
             addView(successView)
         }
     }
