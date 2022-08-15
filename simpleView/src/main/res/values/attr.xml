@@ -113,6 +113,7 @@
         <attr format="reference" name="layout_no_content"/>
         <attr format="reference" name="layout_no_netword"/>
         <attr format="reference" name="layout_error"/>
+        <attr format="reference" name="layout_success"/>
         <attr format="reference" name="layout_loadding"/>
     </declare-styleable>
 

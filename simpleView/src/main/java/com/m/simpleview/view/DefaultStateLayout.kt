@@ -13,11 +13,13 @@ class DefaultStateLayout:FrameLayout {
     private var layoutNoContent:Int = 0
     private var layoutNoNetWord:Int = 0
     private var layoutError:Int = 0
+    private var layoutSuccess:Int = 0
     private var layoutLoadding:Int = 0
 
     private var noContentView: View? = null
     private var noNetWordView: View? = null
     private var errorView: View? = null
+    private var successView: View? = null
     private var loadingView: View? = null
 
     var stateListener:StateListener? = null
@@ -27,6 +29,7 @@ class DefaultStateLayout:FrameLayout {
         layoutNoContent = typedArray.getResourceId(R.styleable.DefaultStateLayout_layout_no_content,0)
         layoutNoNetWord = typedArray.getResourceId(R.styleable.DefaultStateLayout_layout_no_netword,0)
         layoutError = typedArray.getResourceId(R.styleable.DefaultStateLayout_layout_error,0)
+        layoutSuccess = typedArray.getResourceId(R.styleable.DefaultStateLayout_layout_success,0)
         layoutLoadding = typedArray.getResourceId(R.styleable.DefaultStateLayout_layout_loadding,0)
 
     }
@@ -100,6 +103,29 @@ class DefaultStateLayout:FrameLayout {
         }
     }
 
+    fun showSuccess(successMsg:String?){
+        createSuccess()
+        if(successView != null){
+            val tvSuccessMsg = successView!!.findViewById<TextView>(getId(context,"tv_success_msg"))
+            goneAllChild()
+            successView!!.visibility = View.VISIBLE
+            stateListener?.onDefaultStateShow(TYPE_SUCCESS)
+            tvSuccessMsg?.let { tvSuccessMsg?.text = "$successMsg" }
+            if(successView!!.isClickable){
+                successView?.setOnClickListener {
+                    stateListener?.onDefaultStateClick(TYPE_SUCCESS)
+                }
+            }
+        }
+    }
+
+    fun goneSuccess(){
+        if(successView != null){
+            successView!!.visibility = View.GONE
+            stateListener?.onDefaultStateGone(TYPE_SUCCESS)
+        }
+    }
+
     fun showLoadding(isVisiable:Boolean){
         createLoadding()
         if(loadingView != null){
@@ -114,34 +140,104 @@ class DefaultStateLayout:FrameLayout {
         }
     }
 
-    fun findNoNetWordView(id:Int):View?{
+    /** set id click **/
+    fun <T : View?> setNoNetWordClick(id:Int):T?{
+        createNoNetWord()
         if(noNetWordView != null){
-            return noNetWordView!!.findViewById<View>(id)
+            val view = noNetWordView!!.findViewById<T>(id)
+            view?.setOnClickListener {
+                stateListener?.onDefaultStateClickById(TYPE_NO_NET_WORD,id)
+            }
+            return view
         }
         return null
     }
 
-    fun findNoContentView(id:Int):View?{
+    fun <T : View?> setNoContentClick(id:Int):T?{
+        createNoContent()
         if(noContentView != null){
-            return noContentView!!.findViewById<View>(id)
+            val view = noContentView!!.findViewById<T>(id)
+            view?.setOnClickListener {
+                stateListener?.onDefaultStateClickById(TYPE_NO_CONTENT,id)
+            }
+            return view
         }
         return null
     }
 
-    fun findErrorView(id:Int):View?{
+    fun <T : View?> setErrorClick(id:Int):T?{
+        createError()
         if(errorView != null){
-            return errorView!!.findViewById<View>(id)
+            val view = errorView!!.findViewById<T>(id)
+            view?.setOnClickListener {
+                stateListener?.onDefaultStateClickById(TYPE_ERROR,id)
+            }
+            return view
         }
         return null
     }
 
-    fun findLoaddingtView(id:Int):View?{
+    fun <T : View?> setSuccessClick(id:Int):T?{
+        createSuccess()
+        if(successView != null){
+            val view = successView!!.findViewById<T>(id)
+            view?.setOnClickListener {
+                stateListener?.onDefaultStateClickById(TYPE_SUCCESS,id)
+            }
+            return view
+        }
+        return null
+    }
+
+    fun <T : View?> setLoaddingtClick(id:Int):T?{
+        createLoadding()
         if(loadingView != null){
-            return loadingView!!.findViewById<View>(id)
+            val view = loadingView!!.findViewById<T>(id)
+            view?.setOnClickListener {
+                stateListener?.onDefaultStateClickById(TYPE_LOADDING,id)
+            }
+            return view
         }
         return null
     }
 
+    /** find id **/
+    fun <T : View?> findNoNetWordView(id:Int):T?{
+        if(noNetWordView != null){
+            return noNetWordView!!.findViewById<T>(id)
+        }
+        return null
+    }
+
+    fun <T : View?> findNoContentView(id:Int):T?{
+        if(noContentView != null){
+            return noContentView!!.findViewById<T>(id)
+        }
+        return null
+    }
+
+    fun <T : View?> findErrorView(id:Int):T?{
+        if(errorView != null){
+            return errorView!!.findViewById<T>(id)
+        }
+        return null
+    }
+
+    fun <T : View?> findSuccessView(id:Int):T?{
+        if(successView != null){
+            return successView!!.findViewById<T>(id)
+        }
+        return null
+    }
+
+    fun <T : View?> findLoaddingtView(id:Int):T?{
+        if(loadingView != null){
+            return loadingView!!.findViewById<T>(id)
+        }
+        return null
+    }
+
+    /** create view **/
     private fun createLoadding(){
         if(loadingView == null && layoutLoadding != 0){
             loadingView = LayoutInflater.from(context).inflate(layoutLoadding,this,false)
@@ -170,6 +266,13 @@ class DefaultStateLayout:FrameLayout {
         }
     }
 
+    private fun createSuccess(){
+        if(successView == null && layoutSuccess != 0){
+            successView = LayoutInflater.from(context).inflate(layoutSuccess,this,false)
+            addView(successView)
+        }
+    }
+
     private fun getId(context: Context?, name: String?): Int {
         context ?: return 0
         return context.resources.getIdentifier(name, "id", context.packageName)
@@ -185,6 +288,7 @@ class DefaultStateLayout:FrameLayout {
     }
 
     interface StateListener{
+        fun onDefaultStateClickById(type:Int,vid:Int)
         fun onDefaultStateClick(type:Int)
         fun onDefaultStateShow(type:Int)
         fun onDefaultStateGone(type:Int)
@@ -195,6 +299,7 @@ class DefaultStateLayout:FrameLayout {
         const val TYPE_NO_NET_WORD = 1
         const val TYPE_ERROR = 2
         const val TYPE_LOADDING = 3
+        const val TYPE_SUCCESS = 4
     }
 
 }
