@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
 import com.m.simpleview.R
@@ -59,6 +60,8 @@ open class IconTextView :AppCompatTextView {
 
         drawableOne()
         drawableTwo()
+
+        Log.i("margin","constructor")
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -100,7 +103,7 @@ open class IconTextView :AppCompatTextView {
                 && drawable.isStateful
                 && drawable.setState(drawableState)
             ) {
-                invalidateDrawableOne(drawable)
+                configureDrawableOneBounds()
             }
         }
         drawableTwo?.let {
@@ -109,15 +112,14 @@ open class IconTextView :AppCompatTextView {
                 && drawable.isStateful
                 && drawable.setState(drawableState)
             ) {
-                invalidateDrawableTwo(drawable)
+                configureDrawableTwoBounds()
             }
         }
     }
 
     override fun invalidateDrawable(drawable: Drawable) {
         super.invalidateDrawable(drawable)
-        invalidateDrawableOne(drawable)
-        invalidateDrawableTwo(drawable)
+        invalidateDrawable()
     }
 
     private fun drawableOne(){
@@ -146,38 +148,7 @@ open class IconTextView :AppCompatTextView {
         }
     }
 
-    private fun invalidateDrawableOne(drawable: Drawable){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (verifyDrawable(drawable)) {
-                val dirty = drawable.dirtyBounds
-                val scrollX: Int = 0
-                val scrollY: Int = 0
-                invalidate(
-                    dirty.left + scrollX,
-                    dirty.top + scrollY,
-                    dirty.right + scrollX,
-                    dirty.bottom + scrollY
-                )
-            }
-        }
-        configureBounds()
-        invalidate()
-    }
-
-    private fun invalidateDrawableTwo(drawable: Drawable){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (verifyDrawable(drawable)) {
-                val dirty = drawable.dirtyBounds
-                val scrollX: Int = 0
-                val scrollY: Int = 0
-                invalidate(
-                    dirty.left + scrollX,
-                    dirty.top + scrollY,
-                    dirty.right + scrollX,
-                    dirty.bottom + scrollY
-                )
-            }
-        }
+    private fun invalidateDrawable(){
         configureBounds()
         invalidate()
     }
