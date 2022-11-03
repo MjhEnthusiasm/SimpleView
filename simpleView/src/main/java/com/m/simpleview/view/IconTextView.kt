@@ -17,6 +17,7 @@ open class IconTextView :AppCompatTextView {
 
     var drawableOne: Drawable? = null
     var drawableTwo: Drawable? = null
+    private var curInvalidateDrawable:Drawable? = null
 
     private var drawableOneGravity = 0
     private var drawableOneLeft = 0
@@ -60,8 +61,6 @@ open class IconTextView :AppCompatTextView {
 
         drawableOne()
         drawableTwo()
-
-        Log.i("margin","constructor")
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -119,7 +118,10 @@ open class IconTextView :AppCompatTextView {
 
     override fun invalidateDrawable(drawable: Drawable) {
         super.invalidateDrawable(drawable)
-        invalidateDrawable()
+        if(curInvalidateDrawable != drawable){
+            curInvalidateDrawable = drawable
+            invalidateDrawable()
+        }
     }
 
     private fun drawableOne(){
