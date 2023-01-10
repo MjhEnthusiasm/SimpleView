@@ -154,6 +154,8 @@ open class IconTextView :AppCompatTextView {
         configureBounds()
         invalidate()
         curInvalidateDrawable = null
+        //...
+        //...
     }
 
     private fun configureBounds() {
